@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
 
 const DeleteRecipeButton = ({ recipeId, onDelete }) => {
+  const navigate = useNavigate();
   const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
 
   const handleDelete = () => {
@@ -8,6 +10,8 @@ const DeleteRecipeButton = ({ recipeId, onDelete }) => {
       deleteRecipe(recipeId);
       if (onDelete) {
         onDelete();
+      } else {
+        navigate('/');
       }
     }
   };

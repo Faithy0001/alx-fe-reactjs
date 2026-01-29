@@ -10,3 +10,22 @@ export const fetchUserData = async (username) => {
     throw error;
   }
 };
+
+export const fetchAdvancedUserData = async (username, location, minRepos) => {
+  try {
+    let query = username ? `user:${username}` : '';
+    
+    if (location) {
+      query += ` location:${location}`;
+    }
+    
+    if (minRepos) {
+      query += ` repos:>=${minRepos}`;
+    }
+
+    const response = await axios.get(`${BASE_URL}/search/users?q=${query}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

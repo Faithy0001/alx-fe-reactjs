@@ -13,7 +13,7 @@ export const fetchUserData = async (username) => {
 
 export const fetchAdvancedUserData = async (username, location, minRepos) => {
   try {
-    let query = username ? `user:${username}` : '';
+    let query = username ? username : '';
     
     if (location) {
       query += ` location:${location}`;
@@ -23,7 +23,7 @@ export const fetchAdvancedUserData = async (username, location, minRepos) => {
       query += ` repos:>=${minRepos}`;
     }
 
-    const response = await axios.get(`${BASE_URL}/search/users?q=${query}`);
+    const response = await axios.get(`https://api.github.com/search/users?q=${query}`);
     return response.data;
   } catch (error) {
     throw error;

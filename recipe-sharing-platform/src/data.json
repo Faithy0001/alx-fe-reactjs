@@ -3,36 +3,157 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "400g spaghetti",
+      "200g pancetta or bacon",
+      "4 large eggs",
+      "100g Parmesan cheese, grated",
+      "2 cloves garlic, minced",
+      "Salt and black pepper to taste",
+      "Fresh parsley for garnish"
+    ],
+    "instructions": [
+      "Bring a large pot of salted water to boil and cook spaghetti according to package directions.",
+      "While pasta cooks, fry pancetta in a large skillet until crispy.",
+      "In a bowl, whisk together eggs and grated Parmesan cheese.",
+      "Drain pasta, reserving 1 cup of pasta water.",
+      "Add hot pasta to the skillet with pancetta, remove from heat.",
+      "Quickly stir in egg mixture, adding pasta water to create a creamy sauce.",
+      "Season with salt and pepper, garnish with parsley and serve immediately."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breast, cubed",
+      "1 cup yogurt",
+      "2 tbsp tikka masala spice",
+      "400g canned tomatoes",
+      "200ml heavy cream",
+      "1 onion, diced",
+      "3 cloves garlic, minced",
+      "2 tbsp butter",
+      "Fresh cilantro for garnish"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and half the tikka masala spice for at least 1 hour.",
+      "Grill or pan-fry marinated chicken until cooked through.",
+      "In a large pan, melt butter and sauté onion and garlic until soft.",
+      "Add remaining tikka masala spice and cook for 1 minute.",
+      "Add canned tomatoes and simmer for 10 minutes.",
+      "Stir in cream and cooked chicken, simmer for 5 more minutes.",
+      "Garnish with fresh cilantro and serve with rice or naan."
+    ]
   },
   {
     "id": 3,
     "title": "Caesar Salad",
     "summary": "A green salad of romaine lettuce and croutons dressed with lemon juice, olive oil, egg, Worcestershire sauce, anchovies, garlic, Dijon mustard, Parmesan cheese, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "1 large head romaine lettuce",
+      "1 cup croutons",
+      "1/2 cup Parmesan cheese, shaved",
+      "2 cloves garlic",
+      "2 anchovy fillets",
+      "1 egg yolk",
+      "2 tbsp lemon juice",
+      "1 tsp Dijon mustard",
+      "1/2 cup olive oil",
+      "Salt and pepper to taste"
+    ],
+    "instructions": [
+      "Wash and chop romaine lettuce into bite-sized pieces.",
+      "In a bowl, mash garlic and anchovies into a paste.",
+      "Whisk in egg yolk, lemon juice, and Dijon mustard.",
+      "Slowly drizzle in olive oil while whisking to create an emulsion.",
+      "Season dressing with salt and pepper.",
+      "Toss lettuce with dressing until well coated.",
+      "Top with croutons and Parmesan shavings, serve immediately."
+    ]
   },
   {
     "id": 4,
     "title": "Chocolate Cake",
     "summary": "A rich, moist chocolate cake with a smooth chocolate frosting.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "2 cups all-purpose flour",
+      "2 cups sugar",
+      "3/4 cup cocoa powder",
+      "2 tsp baking soda",
+      "1 tsp baking powder",
+      "1 tsp salt",
+      "2 eggs",
+      "1 cup buttermilk",
+      "1 cup strong black coffee",
+      "1/2 cup vegetable oil",
+      "2 tsp vanilla extract"
+    ],
+    "instructions": [
+      "Preheat oven to 350°F (175°C). Grease and flour two 9-inch cake pans.",
+      "In a large bowl, combine flour, sugar, cocoa, baking soda, baking powder, and salt.",
+      "Add eggs, buttermilk, coffee, oil, and vanilla. Beat for 2 minutes.",
+      "Pour batter into prepared pans.",
+      "Bake for 30-35 minutes until a toothpick inserted comes out clean.",
+      "Cool in pans for 10 minutes, then remove to wire racks.",
+      "Frost with your favorite chocolate frosting when completely cool."
+    ]
   },
   {
     "id": 5,
     "title": "Grilled Salmon",
     "summary": "Fresh salmon fillet grilled to perfection with a lemon butter sauce.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "4 salmon fillets",
+      "2 tbsp olive oil",
+      "Salt and pepper to taste",
+      "4 tbsp butter",
+      "2 cloves garlic, minced",
+      "Juice of 1 lemon",
+      "Fresh dill for garnish",
+      "Lemon wedges for serving"
+    ],
+    "instructions": [
+      "Preheat grill to medium-high heat.",
+      "Brush salmon with olive oil and season with salt and pepper.",
+      "Place salmon skin-side down on the grill.",
+      "Grill for 4-6 minutes per side until fish flakes easily.",
+      "While salmon cooks, melt butter in a small pan.",
+      "Add garlic and cook for 1 minute, then add lemon juice.",
+      "Drizzle lemon butter sauce over grilled salmon, garnish with dill and serve."
+    ]
   },
   {
     "id": 6,
     "title": "Vegetable Stir Fry",
     "summary": "A colorful mix of fresh vegetables stir-fried in a savory sauce.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "2 cups broccoli florets",
+      "1 bell pepper, sliced",
+      "1 cup snap peas",
+      "1 carrot, julienned",
+      "2 cloves garlic, minced",
+      "1 tbsp ginger, grated",
+      "3 tbsp soy sauce",
+      "1 tbsp sesame oil",
+      "1 tbsp cornstarch",
+      "2 tbsp vegetable oil"
+    ],
+    "instructions": [
+      "Heat vegetable oil in a large wok or skillet over high heat.",
+      "Add garlic and ginger, stir-fry for 30 seconds.",
+      "Add harder vegetables (broccoli, carrots) first, stir-fry for 2 minutes.",
+      "Add softer vegetables (bell pepper, snap peas), stir-fry for 2 more minutes.",
+      "Mix soy sauce, sesame oil, and cornstarch with 2 tbsp water.",
+      "Pour sauce over vegetables and toss to coat.",
+      "Cook for 1 minute until sauce thickens, serve over rice."
+    ]
   }
 ]

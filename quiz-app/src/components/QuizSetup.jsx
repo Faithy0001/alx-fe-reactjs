@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchCategories } from '../services/triviaService';
+import SearchBar from './SearchBar';
 
 function QuizSetup() {
   const navigate = useNavigate();
@@ -26,13 +27,20 @@ function QuizSetup() {
     loadCategories();
   }, []);
 
+  const handleSelectCategory = (category) => {
+    if (category) {
+      setSelectedCategory(category.id);
+    } else {
+      setSelectedCategory('');
+    }
+  };
+
   const handleStartQuiz = () => {
     if (!selectedCategory || !selectedDifficulty) {
       alert('Please select both category and difficulty');
       return;
     }
 
-    // Navigate to quiz page with selected options
     navigate('/quiz', {
       state: {
         category: selectedCategory,
@@ -82,11 +90,34 @@ function QuizSetup() {
 
         {/* Setup Form */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
-          
-          {/* Category Selection */}
+
+          {/* Search Bar */}
           <div className="mb-6">
             <label className="block text-gray-700 text-lg font-semibold mb-3">
-              Select Category
+              Search for a Topic
+            </label>
+            <SearchBar
+              categories={categories}
+              onSelectCategory={handleSelectCategory}
+            />
+            {selectedCategory && (
+              <p className="mt-2 text-green-600 text-sm font-semibold">
+                ✅ Category selected!
+              </p>
+            )}
+          </div>
+
+          {/* OR Divider */}
+          <div className="flex items-center mb-6">
+            <div className="flex-1 border-t border-gray-300"></div>
+            <span className="px-4 text-gray-500 font-semibold">OR</span>
+            <div className="flex-1 border-t border-gray-300"></div>
+          </div>
+
+          {/* Category Dropdown */}
+          <div className="mb-6">
+            <label className="block text-gray-700 text-lg font-semibold mb-3">
+              Browse Categories
             </label>
             <select
               value={selectedCategory}

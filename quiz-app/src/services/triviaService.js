@@ -13,8 +13,8 @@ export const fetchCategories = async () => {
   }
 };
 
-// Fetch quiz questions
-export const fetchQuizQuestions = async (amount = 10, category = '', difficulty = '') => {
+// Fetch quiz questions with retry logic for rate limiting
+export const fetchQuizQuestions = async (amount = 10, category = '', difficulty = '', attempt = 0) => {
   try {
     let url = `${BASE_URL}/api.php?amount=${amount}&type=multiple`;
     
@@ -29,6 +29,13 @@ export const fetchQuizQuestions = async (amount = 10, category = '', difficulty 
     const response = await axios.get(url);
     return response.data.results;
   } catch (error) {
+    // Retry on 429 (Too Many Requests) with exponential backoff
+    if (error.response?.status === 429 && attempt < 3) {
+      const delay = Math.pow(2, attempt) * 2000; // 2s, 4s, 8s
+      console.warn(`Rate limited. Retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return fetchQuizQuestions(amount, category, difficulty, attempt + 1);
+    }
     console.error('Error fetching quiz questions:', error);
     throw error;
   }

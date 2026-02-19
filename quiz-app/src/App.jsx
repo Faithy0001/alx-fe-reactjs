@@ -3,6 +3,7 @@ import HomePage from './components/HomePage';
 import TestAPI from './components/TestAPI';
 import QuizSetup from './components/QuizSetup';
 import QuizPage from './components/QuizPage';
+import ScoreSummary from './components/ScoreSummary';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/test-api" element={<TestAPI />} />
         <Route path="/quiz-setup" element={<QuizSetup />} />
         <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/results" element={<ScoreSummary />} />
       </Routes>
     </Router>
   );

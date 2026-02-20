@@ -1,40 +1,9 @@
-import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { decodeHTML } from '../services/triviaService';
 
 function ScoreSummary() {
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Save quiz result to localStorage
-    if (location.state) {
-      const { answers, totalQuestions } = location.state;
-      const correctAnswers = answers.filter(answer => answer.isCorrect).length;
-
-      // Get category and difficulty from first answer's question
-      const quizResult = {
-        id: Date.now(),
-        category: answers[0]?.question ? 'Quiz' : 'General',
-        difficulty: 'mixed',
-        score: correctAnswers,
-        totalQuestions: totalQuestions,
-        date: new Date().toLocaleDateString()
-      };
-
-      // Get existing history
-      const existingHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
-      
-      // Add new result
-      const updatedHistory = [quizResult, ...existingHistory];
-      
-      // Keep only last 20 results
-      const limitedHistory = updatedHistory.slice(0, 20);
-      
-      // Save to localStorage
-      localStorage.setItem('quizHistory', JSON.stringify(limitedHistory));
-    }
-  }, [location.state]);
 
   if (!location.state) {
     navigate('/');
@@ -121,16 +90,10 @@ function ScoreSummary() {
               Take Another Quiz
             </button>
             <button
-              onClick={() => navigate('/history')}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors"
-            >
-              View History
-            </button>
-            <button
               onClick={() => navigate('/')}
               className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-3 rounded-lg transition-colors"
             >
-              Home
+              Back to Home
             </button>
           </div>
         </div>

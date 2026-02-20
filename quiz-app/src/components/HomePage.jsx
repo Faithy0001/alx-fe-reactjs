@@ -22,12 +22,20 @@ function HomePage() {
           </ul>
         </div>
         
-        <Link 
-          to="/quiz-setup"
-          className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold text-xl py-4 px-12 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
-        >
-          Start Quiz
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link 
+            to="/quiz-setup"
+            className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xl py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            Start Quiz
+          </Link>
+          <Link 
+            to="/history"
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            View History
+          </Link>
+        </div>
       </div>
     </div>
   );

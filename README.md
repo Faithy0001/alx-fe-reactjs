@@ -10,6 +10,13 @@ A React application demonstrating advanced data fetching and management using Re
 
 ## Setup
 
-```bash
+Install dependencies:
 npm install
+
+Run the app:
 npm run dev
+
+## Technologies Used
+- React
+- React Query
+- JSONPlaceholder API

@@ -1,0 +1,300 @@
+State management in React
+ Weight: 1
+ Project will start Jan 18, 2026 10:00 PM, must end by Jan 25, 2026 9:59 PM
+
+
+
+In the “State Management in React” project, you will learn to manage state effectively in a React application using Zustand. This project will cover essential concepts and techniques for state management, culminating in the creation of a Recipe Sharing Application. By integrating Zustand, you will enhance your ability to manage complex state interactions in a scalable and maintainable way.
+
+Learning Objectives
+By the end of this project, you will be able to:
+
+Understand and Utilize Zustand for State Management:
+
+Learn the basics of Zustand and how to integrate it into a React application for efficient state management.
+Manage State with Zustand:
+
+Implement and manage application state using Zustand, including creating stores and defining state actions.
+Explore Advanced Zustand Features:
+
+Utilize advanced features of Zustand to handle more complex state management scenarios.
+Build a Todo List Application Using Zustand:
+
+Apply your knowledge by building a functional Recipe Sharing Application that includes adding, editing, deleting, and managing recipes using Zustand for state management.
+Tasks
+0. Initialize the Recipe Sharing Application with Zustand State Management
+mandatory
+Objective: Start building a Recipe Sharing Application with React and Zustand, setting up the initial state management for recipes.
+
+Task Description:
+Kick off the project by creating the foundational React application, integrating Zustand for state management, and setting up a simple interface for displaying and adding recipes.
+
+Step 1: Set Up the React Project and Install Zustand
+Create a New React Project:
+  npm create vite@latest recipe-sharing-app -- --template react
+  cd recipe-sharing-app
+Install Zustand:
+  npm install zustand
+Step 2: Define the Recipe Store with Zustand
+Create a Zustand Store:
+
+Develop a store to manage the recipes with actions for adding a new recipe and initializing the list.
+Here’s a basic template for the store:
+import create from 'zustand'
+
+const useRecipeStore = create(set => ({
+  recipes: [],
+  addRecipe: (newRecipe) => set(state => ({ recipes: [...state.recipes, newRecipe] })),
+  setRecipes: (recipes) => set({ recipes })
+}));
+Step 3: Implement Recipe Components
+Develop React Components:
+RecipeList Component: Displays the list of recipes.
+AddRecipeForm Component: Allows users to input and submit new recipes.
+The above components should be under src/components directory
+  // RecipeList component
+  import { useRecipeStore } from './recipeStore';
+
+  const RecipeList = () => {
+    const recipes = useRecipeStore(state => state.recipes);
+
+    return (
+      <div>
+        {recipes.map(recipe => (
+          <div key={recipe.id}>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // AddRecipeForm component
+  import { useState } from 'react';
+  import { useRecipeStore } from './recipeStore';
+
+  const AddRecipeForm = () => {
+    const addRecipe = useRecipeStore(state => state.addRecipe);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      addRecipe({ id: Date.now(), title, description });
+      setTitle('');
+      setDescription('');
+    };
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+        />
+        <button type="submit">Add Recipe</button>
+      </form>
+    );
+  };
+Step 4: Integrate Components in the App
+Use Components in the Main App Component:
+Import and use RecipeList and AddRecipeForm in App.jsx to display the functionality.
+Deliverables:
+React Project Setup: Project directory and initial setup files.
+Zustand Store Code: The Zustand store configuration file.
+Component Code: Source code for the RecipeList and AddRecipeForm components.
+Repo:
+
+GitHub repository: alx-fe-reactjs
+Directory: recipe-sharing-app
+ 
+1. Enhancing the Recipe Sharing Application with Detailed Recipe Management
+mandatory
+Objective: Expand the Recipe Sharing Application to include detailed recipe management features such as editing and deleting recipes, as well as viewing individual recipe details.
+
+Task Description:
+Build on the initial setup by adding functionality to view individual recipes, edit existing recipes, and delete recipes. This task introduces more complex state manipulations and interactions within the Zustand store and React components.
+
+Step 1: Update the Zustand Store
+Enhance the Store:
+Extend your existing Zustand store to include actions for updating and deleting recipes. The actions should be named addRecipe, deleteRecipe,updateRecipe`.
+Step 2: Create Components for Recipe Details, Editing, and Deleting
+Develop New Components:
+RecipeDetails Component: Displays detailed information about a recipe. This component should be accessible via a route that includes the recipe’s ID.
+EditRecipeForm Component: Allows users to edit an existing recipe and submit changes.
+DeleteRecipeButton Component: A simple button that, when clicked, deletes a specific recipe.
+Here’s an example of the RecipeDetails and EditRecipeForm components:
+
+  // RecipeDetails component
+  import { useRecipeStore } from './recipeStore';
+
+  const RecipeDetails = ({ recipeId }) => {
+    const recipe = useRecipeStore(state =>
+      state.recipes.find(recipe => recipe.id === recipeId)
+    );
+
+    return (
+      <div>
+        <h1>{recipe.title}</h1>
+        <p>{recipe.description}</p>
+        {/* Render EditRecipeForm and DeleteRecipeButton here */}
+      </div>
+    );
+  };
+Step 3: Integrate Routing for Recipe Details
+Setup React Router (if not already set up):
+Implement routing in your application to handle navigation to different recipes’ details.
+Use react-router-dom to set up routes that match the path to RecipeDetails.
+Step 4: Testing and Integration
+Test New Features:
+Ensure all new components function correctly within the app. Test the edit and delete functionalities thoroughly to ensure state updates are handled properly across all components.
+Deliverables:
+Code Files: Include updated store configurations, new React components for recipe details, editing, and deleting.
+Routing Setup: Changes made to support routing to different components.
+Repo:
+
+GitHub repository: alx-fe-reactjs
+Directory: recipe-sharing-app
+ 
+2. Implementing Advanced Search and Filtering Capabilities
+mandatory
+Objective: Enhance the Recipe Sharing Application with advanced search and filtering capabilities, allowing users to easily locate recipes based on specific criteria such as ingredients, recipe name, or preparation time.
+
+Task Description:
+Expand the functionality of your Recipe Sharing Application by integrating advanced search and filtering mechanisms. This will improve the user experience by making it easier to navigate and find specific recipes within the application.
+
+Step 1: Update the Zustand Store for Search and Filtering
+Enhance the Store:
+
+Extend your existing Zustand store to include a search term and filtered results. Add actions to update the search term and compute filtered recipes based on this term.
+Here’s an example of how to structure these updates:
+import create from 'zustand';
+
+const useRecipeStore = create(set => ({
+  recipes: [],
+  searchTerm: '',
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  filteredRecipes: [],
+  filterRecipes: () => set(state => ({
+    filteredRecipes: state.recipes.filter(recipe =>
+      recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+    ))
+  })),
+}));
+Step 2: Create Search Input Component
+Develop Search Component:
+
+Create a SearchBar component that allows users to input a search term. This component should update the search term in the Zustand store on change.
+Example of the SearchBar component:
+import React from 'react';
+import { useRecipeStore } from './recipeStore';
+
+const SearchBar = () => {
+  const setSearchTerm = useRecipeStore(state => state.setSearchTerm);
+
+  return (
+    <input
+      type="text"
+      placeholder="Search recipes..."
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  );
+};
+Step 3: Display Filtered Results
+Show Filtered Recipes:
+Modify the RecipeList component to display recipes from the filteredRecipes array in the Zustand store instead of the complete list. Ensure it updates dynamically as the search term changes.
+Trigger the filtering action whenever the search term is updated.
+Step 4: Enhance User Interface for Filtering
+UI Improvements:
+Ensure that the search bar and the list of filtered results are displayed prominently in the UI.
+Consider adding additional filters based on other criteria like ingredients or cooking time if relevant to your application’s data structure.
+Step 5: Testing and Integration
+Comprehensive Testing:
+Test the search functionality extensively to ensure that it accurately filters recipes based on user input.
+Check the responsiveness of the interface when dealing with a large number of recipes to ensure performance remains optimal.
+Repo:
+
+GitHub repository: alx-fe-reactjs
+Directory: recipe-sharing-app
+ 
+3. Implementing User Favorites and Personalized Recipe Recommendations
+mandatory
+Objective: Enhance the user experience in your Recipe Sharing Application by adding functionality for users to favorite recipes and receive personalized recommendations based on their preferences and interactions.
+
+Task Description:
+Develop features that allow users to mark recipes as favorites and leverage user data to suggest personalized recipe recommendations. This addition will make the application more engaging and tailored to individual user tastes.
+
+Step 1: Update the Zustand Store for Favorites and Recommendations
+Enhance the Store:
+
+Add a favorites array to the Zustand store to manage the user’s favorite recipes.
+Implement actions in the store to add and remove recipes from favorites.
+Optionally, add a mechanism to generate recommendations based on the user’s favorite recipes or other criteria.
+Here’s an example of how to structure these updates:
+import create from 'zustand';
+
+const useRecipeStore = create(set => ({
+  recipes: [],
+  favorites: [],
+  addFavorite: (recipeId) => set(state => ({ favorites: [...state.favorites, recipeId] })),
+  removeFavorite: (recipeId) => set(state => ({
+    favorites: state.favorites.filter(id => id !== recipeId)
+  })),
+  recommendations: [],
+  generateRecommendations: () => set(state => {
+    // Mock implementation based on favorites
+    const recommended = state.recipes.filter(recipe =>
+      state.favorites.includes(recipe.id) && Math.random() > 0.5
+    );
+    return { recommendations: recommended };
+  }),
+}));
+Step 2: Create Components for Favorites and Recommendations
+Develop New Components:
+
+FavoritesList Component: Displays a list of the user’s favorite recipes.
+RecommendationsList Component: Shows personalized recipe recommendations based on the user’s favorites or other criteria.
+Example of the FavoritesList component:
+import { useRecipeStore } from './recipeStore';
+
+const FavoritesList = () => {
+  const favorites = useRecipeStore(state => state.favorites.map(id =>
+    state.recipes.find(recipe => recipe.id === id)
+  ));
+
+  return (
+    <div>
+      <h2>My Favorites</h2>
+      {favorites.map(recipe => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+Step 3: Integrate Favorites and Recommendations into the UI
+UI Integration:
+Place FavoritesList and RecommendationsList components appropriately in the main application layout.
+Ensure that users can easily add or remove recipes from their favorites and view recommendations seamlessly.
+Step 4: Testing and User Feedback
+Comprehensive Testing:
+Test the functionality of adding and removing favorites extensively.
+Evaluate the relevance and accuracy of the recommendations system.
+Gather user feedback on the favorites and recommendations features to refine and improve them.
+Step 5: Documentation and Final Adjustments
+Final Documentation and Adjustments:
+Ensure all new features are fully integrated and functioning as expected within the overall application.
+Provide brief inline comments or notes explaining the logic behind the favorites and recommendations features.
+Repo:
+
+GitHub repository: alx-fe-reactjs
+Directory: recipe-sharing-app

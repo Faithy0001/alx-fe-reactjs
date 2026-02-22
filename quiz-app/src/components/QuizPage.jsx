@@ -32,7 +32,7 @@ function QuizPage() {
         }
       } catch (err) {
         if (isMounted) {
-          setError('Failed to load questions. Please try again later.');
+          setError(err.message || 'Failed to load questions. Please try again later.');
           setLoading(false);
         }
       }
@@ -55,7 +55,9 @@ function QuizPage() {
       question: questions[currentQuestionIndex].question,
       selectedAnswer: selectedAnswer,
       correctAnswer: questions[currentQuestionIndex].correct_answer,
-      isCorrect: selectedAnswer === questions[currentQuestionIndex].correct_answer
+      isCorrect: selectedAnswer === questions[currentQuestionIndex].correct_answer,
+      category: questions[currentQuestionIndex].category,
+      difficulty: questions[currentQuestionIndex].difficulty
     };
     setUserAnswers(newAnswers);
 
@@ -74,24 +76,35 @@ function QuizPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-        <div className="text-white text-2xl">Loading questions...</div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-4">
+        <div className="flex flex-col items-center gap-4">
+          <div className="spinner"></div>
+          <p className="text-white text-xl font-semibold">Loading questions...</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-xl max-w-md text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
-          <p className="text-gray-700 mb-4">{error}</p>
-          <button
-            onClick={() => navigate('/quiz-setup')}
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
-          >
-            Back to Setup
-          </button>
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-4">
+        <div className="bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Questions</h2>
+          <p className="text-gray-700 mb-6 text-sm md:text-base">{error}</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => navigate('/quiz-setup')}
+              className="flex-1 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold text-sm md:text-base"
+            >
+              Back to Setup
+            </button>
+            <button
+              onClick={() => navigate('/')}
+              className="flex-1 bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors font-semibold text-sm md:text-base"
+            >
+              Home
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -99,13 +112,13 @@ function QuizPage() {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-xl max-w-md text-center">
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-4">
+        <div className="bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-md w-full text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">No Questions Available</h2>
-          <p className="text-gray-700 mb-4">Try different settings</p>
+          <p className="text-gray-700 mb-6 text-sm md:text-base">Try different settings or check your internet connection</p>
           <button
             onClick={() => navigate('/quiz-setup')}
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
+            className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
           >
             Back to Setup
           </button>
@@ -115,7 +128,7 @@ function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 py-6 md:py-8 px-4 page-animation">
       <div className="max-w-3xl mx-auto">
         <QuestionCard
           question={questions[currentQuestionIndex]}
@@ -125,17 +138,28 @@ function QuizPage() {
           selectedAnswer={selectedAnswer}
         />
 
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-end gap-4">
+          {currentQuestionIndex > 0 && (
+            <button
+              onClick={() => {
+                setCurrentQuestionIndex(currentQuestionIndex - 1);
+                setSelectedAnswer('');
+              }}
+              className="px-6 py-3 rounded-lg font-bold transition-all bg-gray-300 hover:bg-gray-400 text-gray-700 text-sm md:text-base"
+            >
+              ← Previous
+            </button>
+          )}
           <button
             onClick={handleNext}
             disabled={!selectedAnswer}
-            className={`px-8 py-3 rounded-lg font-bold transition-all ${
+            className={`px-6 md:px-8 py-3 rounded-lg font-bold transition-all text-sm md:text-base ${
               selectedAnswer
                 ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Finish Quiz'}
+            {currentQuestionIndex < questions.length - 1 ? 'Next Question →' : 'Finish Quiz'}
           </button>
         </div>
       </div>

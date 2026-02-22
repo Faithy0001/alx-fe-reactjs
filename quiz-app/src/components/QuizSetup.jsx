@@ -52,48 +52,59 @@ function QuizSetup() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-        <div className="text-white text-2xl">Loading categories...</div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-4">
+        <div className="flex flex-col items-center gap-4">
+          <div className="spinner"></div>
+          <p className="text-white text-xl font-semibold">Loading categories...</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-xl max-w-md">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
-          <p className="text-gray-700 mb-4">{error}</p>
-          <button
-            onClick={() => navigate('/')}
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
-          >
-            Back to Home
-          </button>
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-4">
+        <div className="bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Categories</h2>
+          <p className="text-gray-700 mb-6">{error}</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => window.location.reload()}
+              className="flex-1 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
+            >
+              Retry
+            </button>
+            <button
+              onClick={() => navigate('/')}
+              className="flex-1 bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors font-semibold"
+            >
+              Back to Home
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 py-8 px-4 page-animation">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Setup Your Quiz
           </h1>
-          <p className="text-xl text-purple-100">
+          <p className="text-lg md:text-xl text-purple-100">
             Choose your preferences to begin
           </p>
         </div>
 
         {/* Setup Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 card-animation">
 
           {/* Search Bar */}
           <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-semibold mb-3">
+            <label className="block text-gray-700 text-base md:text-lg font-semibold mb-3">
               Search for a Topic
             </label>
             <SearchBar
@@ -110,19 +121,19 @@ function QuizSetup() {
           {/* OR Divider */}
           <div className="flex items-center mb-6">
             <div className="flex-1 border-t border-gray-300"></div>
-            <span className="px-4 text-gray-500 font-semibold">OR</span>
+            <span className="px-4 text-gray-500 font-semibold text-sm">OR</span>
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
 
           {/* Category Dropdown */}
           <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-semibold mb-3">
+            <label className="block text-gray-700 text-base md:text-lg font-semibold mb-3">
               Browse Categories
             </label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-gray-700"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-gray-700 text-sm md:text-base"
             >
               <option value="">Choose a category...</option>
               {categories.map((category) => (
@@ -135,15 +146,15 @@ function QuizSetup() {
 
           {/* Difficulty Selection */}
           <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-semibold mb-3">
+            <label className="block text-gray-700 text-base md:text-lg font-semibold mb-3">
               Select Difficulty
             </label>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-3">
               {['easy', 'medium', 'hard'].map((difficulty) => (
                 <button
                   key={difficulty}
                   onClick={() => setSelectedDifficulty(difficulty)}
-                  className={`py-3 rounded-lg font-semibold transition-all ${
+                  className={`py-3 rounded-lg font-semibold transition-all text-sm md:text-base ${
                     selectedDifficulty === difficulty
                       ? 'bg-purple-600 text-white shadow-lg transform scale-105'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -157,8 +168,8 @@ function QuizSetup() {
 
           {/* Number of Questions */}
           <div className="mb-8">
-            <label className="block text-gray-700 text-lg font-semibold mb-3">
-              Number of Questions: {numberOfQuestions}
+            <label className="block text-gray-700 text-base md:text-lg font-semibold mb-3">
+              Number of Questions: <span className="text-purple-600">{numberOfQuestions}</span>
             </label>
             <input
               type="range"
@@ -169,7 +180,7 @@ function QuizSetup() {
               onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
               className="w-full"
             />
-            <div className="flex justify-between text-sm text-gray-600 mt-2">
+            <div className="flex justify-between text-xs md:text-sm text-gray-600 mt-2">
               <span>5</span>
               <span>10</span>
               <span>15</span>
@@ -177,16 +188,16 @@ function QuizSetup() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => navigate('/')}
-              className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-3 rounded-lg transition-colors"
+              className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-3 rounded-lg transition-colors text-sm md:text-base"
             >
               Back
             </button>
             <button
               onClick={handleStartQuiz}
-              className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg transition-colors"
+              className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg transition-colors text-sm md:text-base"
             >
               Start Quiz
             </button>

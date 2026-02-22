@@ -1,0 +1,83 @@
+Week 1: Setup & Basic API Integration
+✅ Set up React with Vite
+✅ Install Tailwind CSS & Axios
+✅ Create project structure
+✅ Build triviaService.js (fetch questions + categories)
+✅ Test API endpoints
+✅ Create HomePage component
+NEW: Fetch and display categories from API
+Week 2: Quiz Setup & Question Display
+✅ Build QuizStart component (category/difficulty/amount selection)
+✅ Create QuestionCard component
+✅ Implement QuizPage with question navigation
+✅ Add answer selection functionality
+NEW: Add SearchBar component for topic search
+Week 3: Score Tracking, Results & History
+✅ Track user answers
+✅ Calculate final score
+✅ Build ScoreSummary component (exact name required!)
+✅ NEW: Implement QuizHistory component
+✅ NEW: Store quiz history in localStorage
+✅ Add restart/new quiz functionality
+Week 4: Polish, Error Handling & Responsive Design
+✅ Implement comprehensive error handling
+✅ Add loading states
+✅ Style with Tailwind CSS (responsive)
+✅ Test search functionality thoroughly
+✅ Ensure quiz history persistence
+✅ Add animations/transitions
+Week 5: Testing & Deployment
+✅ Test all features thoroughly
+✅ Fix bugs
+✅ Deploy to Vercel or Netlify
+✅ Write comprehensive README
+✅ Final testing on deployed version
+
+Key Technical Decisions
+State Management:
+Use useState + useEffect for basic functionality
+Use localStorage for quiz history persistence
+Optional: Zustand/Redux if complexity grows
+Search Implementation:
+Fetch all categories once
+Filter locally based on search input
+Show "No results" message when no matches
+Quiz History Storage:
+javascript
+// localStorage structure
+{
+  quizHistory: [
+    {
+      id: '123',
+      topic: 'General Knowledge',
+      difficulty: 'medium',
+      score: 7,
+      totalQuestions: 10,
+      date: '2026-01-29'
+    }
+  ]
+}
+
+Updated Checklist
+Core Features (Required):
+Topic selection from API categories
+Difficulty selection
+Number of questions selection
+One question at a time
+Multiple-choice answers
+Score tracking
+ScoreSummary component
+Quiz history with localStorage
+Search functionality
+Responsive design
+Error handling
+Deployment
+Optional (Stretch Goals):
+Answer feedback (correct/incorrect)
+Performance tracking
+User authentication
+Timer per question
+Dark mode
+Social sharing
+
+
